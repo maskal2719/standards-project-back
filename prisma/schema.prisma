@@ -7,23 +7,40 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model ProductType {
-  id        Int              @id @default(autoincrement())
-  name      String
-  subTypes  ProductSubType[]
+model Student {
+  id         Int       @id @default(autoincrement())
+  fullName   String
+  birthDate  DateTime
+  class      String
+  results    Result[]
 }
 
-model ProductSubType {
-  id          Int          @id @default(autoincrement())
-  name        String
-  productType ProductType  @relation(fields: [productTypeId], references: [id])
-  productTypeId   Int
-  products     Product[]
+model Normative {
+  id      Int      @id @default(autoincrement())
+  name    String
+  grades  Grade[]
+  results Result[]
 }
 
-model Product {
-  id           Int            @id @default(autoincrement())
-  name         String
-  productSubType  ProductSubType  @relation(fields: [subTypeId], references: [id])
-  subTypeId    Int
+model Grade {
+  id           Int      @id @default(autoincrement())
+  ageGroup     String   // Возрастная группа (например, "14-15", "16-17")
+  normativeId  Int
+  resultValue  Float    // Минимальное значение для получения оценки
+  grade        Int      // Оценка (например, 5, 4, 3)
+  normative    Normative @relation(fields: [normativeId], references: [id])
+
+  Result Result[]
+}
+
+model Result {
+  id          Int       @id @default(autoincrement())
+  studentId   Int
+  normativeId Int
+  resultValue Float     // Результат, который ввел пользователь
+  gradeId     Int?      // Оценка, которая будет определена автоматически
+  quarter     Int       // Четверть (или другой период)
+  student     Student   @relation(fields: [studentId], references: [id])
+  normative   Normative @relation(fields: [normativeId], references: [id])
+  grade       Grade?    @relation(fields: [gradeId], references: [id])
 }
