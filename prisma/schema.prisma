@@ -11,6 +11,7 @@ model Student {
   id         Int       @id @default(autoincrement())
   fullName   String
   birthDate  DateTime
+  gender     String
   class      String
   results    Result[]
 }

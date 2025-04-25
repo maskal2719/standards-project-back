@@ -12,4 +12,8 @@ export class CreateStudentDto {
   @IsDateString()
   @IsNotEmpty()
   birthDate: string;
+
+  @IsString()
+  @IsNotEmpty()
+  gender: string;
 }

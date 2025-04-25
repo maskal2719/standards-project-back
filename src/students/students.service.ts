@@ -15,6 +15,7 @@ export class StudentsService {
         birthDate: createStudentDto.birthDate
           ? new Date(createStudentDto.birthDate)
           : new Date('1992-02-28'),
+        gender: createStudentDto.gender,
       },
       include: {
         results: true,
@@ -23,9 +24,13 @@ export class StudentsService {
   }
 
   async findAll() {
-    return this.prisma.student.findMany();
-  }
+    const students = await this.prisma.student.findMany();
 
+    return students.map((student) => ({
+      ...student,
+      gender: student.gender === 'male' ? 'муж' : 'жен',
+    }));
+  }
   async findOne(id: number) {
     const student = await this.prisma.student.findUnique({
       where: { id },
