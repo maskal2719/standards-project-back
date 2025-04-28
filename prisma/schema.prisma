@@ -9,10 +9,13 @@ datasource db {
 
 model Student {
   id         Int       @id @default(autoincrement())
-  fullName   String
+  firstName  String
+  lastName   String
+  middleName String
   birthDate  DateTime
   gender     String
-  class      String
+  classNumber String
+  classLetter String
   results    Result[]
 }
 
@@ -25,7 +28,7 @@ model Normative {
 
 model Grade {
   id           Int      @id @default(autoincrement())
-  ageGroup     String   // Возрастная группа (например, "14-15", "16-17")
+  classGroup   String   // класс
   normativeId  Int
   resultValue  Float    // Минимальное значение для получения оценки
   grade        Int      // Оценка (например, 5, 4, 3)

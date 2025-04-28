@@ -10,8 +10,11 @@ export class StudentsService {
   create(createStudentDto: CreateStudentDto) {
     return this.prisma.student.create({
       data: {
-        fullName: createStudentDto.fullName,
-        class: createStudentDto.class,
+        firstName: createStudentDto.firstName,
+        lastName: createStudentDto.lastName,
+        middleName: createStudentDto.middleName,
+        classNumber: createStudentDto.classNumber,
+        classLetter: createStudentDto.classLetter,
         birthDate: createStudentDto.birthDate
           ? new Date(createStudentDto.birthDate)
           : new Date('1992-02-28'),
@@ -58,8 +61,11 @@ export class StudentsService {
     return this.prisma.student.update({
       where: { id },
       data: {
-        fullName: updateStudentDto.fullName,
-        class: updateStudentDto.class,
+        firstName: updateStudentDto.firstName,
+        lastName: updateStudentDto.lastName,
+        middleName: updateStudentDto.middleName,
+        classNumber: updateStudentDto.classNumber,
+        classLetter: updateStudentDto.classLetter,
         birthDate: updateStudentDto.birthDate
           ? new Date(updateStudentDto.birthDate)
           : existingStudent.birthDate,

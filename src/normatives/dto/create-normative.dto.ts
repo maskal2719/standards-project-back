@@ -4,7 +4,7 @@ import { Type } from 'class-transformer';
 class GradeDto {
   @IsString()
   @IsNotEmpty()
-  ageGroup: string;
+  classGroup: string;
 
   @IsNotEmpty()
   resultValue: number;

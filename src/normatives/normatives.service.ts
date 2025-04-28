@@ -26,7 +26,7 @@ export class NormativesService {
         name,
         grades: {
           create: grades.map((grade) => ({
-            ageGroup: grade.ageGroup,
+            classGroup: grade.classGroup,
             resultValue: grade.resultValue,
             grade: grade.grade,
           })),
